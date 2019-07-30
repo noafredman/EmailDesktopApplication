@@ -1,0 +1,48 @@
+﻿<Page x:Class="Email.InboxPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Email"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"  
+      Title="Inbox" x:Name="p">
+    <StackPanel Name="stackPanel" Orientation="Vertical">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Button Content="sign out" Grid.Column="0" Style="{StaticResource YellowButton}" Margin="10,10,0,0" Click="DisconnectClicked"/>
+            <!--This item take up 1/3 of window width-->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" FlowDirection="RightToLeft" HorizontalAlignment="Right" Width="{Binding ActualWidth , ElementName=p, UpdateSourceTrigger = PropertyChanged}">
+                <Button Content="newer" Margin="10,10,10,0" Click="Newer_Clicked" Style="{StaticResource YellowButton}"/>
+                <Button Content="older" Margin="10" Click="Older_Clicked" Style="{StaticResource YellowButton}"/>
+                <!--the following Label is used for the programmer - to debug, so it's are now invisible to the client.-->
+                <Label Name="totalNumberOfPages" FontSize="16" Content="{Binding VM_NumOfPages}" Visibility="Collapsed"/>
+                <!--the following Label is used for the programmer - to debug, so it's are now invisible to the client.-->
+                <Label Name="of" Content=" :of " FontSize="16" Visibility="Collapsed"></Label>
+                <Label Name="pageNumber" FontSize="16" Content="{Binding VM_PageNumber}" />
+            </StackPanel>
+            <!--This item take up remaining 2/3 of window width-->
+        </Grid>
+        <DataGrid VerticalScrollBarVisibility="Visible" Name="dataGrid" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                  Padding="0,0,0,40" ColumnHeaderStyle="{StaticResource Header}" HorizontalContentAlignment="Center"
+                  AutoGenerateColumns="False" ItemsSource="{Binding VM_RowInfo}"
+                  MaxHeight="{Binding ActualHeight , ElementName=p, UpdateSourceTrigger = PropertyChanged}"
+                  IsReadOnly="True" RowHeight="35" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Sender" Width="*" Binding="{Binding Path=Sender}"/>
+                <DataGridTextColumn Header="Subject" Width="*" Binding="{Binding Path=Subject}"/>
+                <!--DataGridTemplateColumn will allow us to insert a button in the right cell dynamically-->
+                <DataGridTemplateColumn CanUserSort="False" Header="Files" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Path=HasAttachments}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</Page>

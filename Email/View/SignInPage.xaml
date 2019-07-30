@@ -1,0 +1,29 @@
+﻿<Page x:Class="Email.SignInPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Email"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SignInPage" Name="w">
+
+    <Grid>
+        <!--container verticle stack panel-->
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+            <!--first row horizontal stack panel-->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="email:" TextAlignment="Center"  Margin="0,0,10,0"
+                           Style="{StaticResource Tblock}" Background="{StaticResource lightGreenBackground}"/>
+                <TextBox Name="emailBox" Style="{StaticResource PasswordTboxLable}"/>
+            </StackPanel>
+            <!--second row horizontal stack panel-->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <TextBlock Text="password:" TextAlignment="Center" Margin="0,0,10,0" 
+                           Style="{StaticResource Tblock}" Background="{StaticResource lightGreenBackground}"/>
+                <PasswordBox Name="pwdBox" Style="{StaticResource PasswordTboxLable}" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp"/>
+            </StackPanel>
+            <Button Name="signBtn" Content="sign in" Margin="0,10,0,0" Click="SignInClicked" Style="{StaticResource GreenButton}"/>
+        </StackPanel>
+    </Grid>
+</Page>
