@@ -56,7 +56,6 @@ namespace Email.Model
                 {
                     this.signIn = true;
                     this.msgNum = imapClient.GetMessageCount() - 3;
-                    //   Console.WriteLine("#messages = " + msgNum);
                     //retrieves user's inbox from gmail account.
                     imapClient.SelectMailbox("INBOX");
                     GetMoreMsgs();
@@ -163,7 +162,6 @@ namespace Email.Model
             catch (Exception e)
             {
                 //unable to sign in
-                //   Console.WriteLine(e.StackTrace);
                 MessageBox.Show("Connection Error. Try Again.",
             "Error in Connection",
             MessageBoxButton.OK,
@@ -188,11 +186,9 @@ namespace Email.Model
         /// </summary>
         private void InitializeGrid()
         {
-            int numOfAttachments = 0;
+            int numOfAttachments = 0, index = 0;
             string msgFrom = "";
-            int index = 0;
             Page = new ObservableCollection<EmailTableRow>();
-
             foreach (AE.Net.Mail.MailMessage msg in mailMessage)
             {
                 numOfAttachments = msg.Attachments.Count;
