@@ -40,7 +40,6 @@ namespace Email
             frame = f;
             //the View has access to the ViewModel wich has access to the Model
             this.vm = new EmailViewModel(new EmailModel());
-            //should comment out when not testing.
             emailBox.Text = "";
             pwdBox.Password = "";
         }
